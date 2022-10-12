@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import { DiaryEditor } from "./DiaryEditor";
 import { DiaryList } from "./DiaryList";
@@ -55,10 +55,26 @@ function App() {
       )
     );
   };
+
+  const getDiaryAnalysis = useMemo(() => {
+    console.log("데이터 분석 시작");
+    const goodCount = data.filter((it) => it.emotion >= 3).length;
+    const badCount = data.length - goodCount;
+    const goodRatio = (goodCount / data.length) * 100;
+
+    return { goodCount, badCount, goodRatio };
+  }, [data.length]); // this funcion is called only when the data.length changes
+
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
+
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <h1>Hello</h1>s
       <DiaryEditor onCreate={onCreate} />
+      <div>전체 일기 개수 : {data.length}</div>
+      <div>기분 좋은 일기 개수 : {goodCount}</div>
+      <div>기분 안좋은 일기 개수 : {badCount}</div>
+      <div>기분 좋은 일기 비율 : {goodRatio}%</div>
       <DiaryList onRemove={onRemove} diaryList={data} onEdit={onEdit} />
     </div>
   );
