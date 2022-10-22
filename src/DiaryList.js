@@ -1,6 +1,8 @@
+import React from "react";
+
 import { DiaryItem } from "./DiaryItem";
 
-export const DiaryList = ({ onRemove, diaryList, onEdit }) => {
+const DiaryList = ({ onRemove, diaryList, onEdit }) => {
   return (
     <div className="DiaryList">
       <h2>diary list</h2>
@@ -18,3 +20,5 @@ DiaryList.defaultProps = {
   // 이와같이 props의 초기값을 정해줄 수 있다!!
   diaryList: [],
 };
+
+export default React.memo(DiaryItem);

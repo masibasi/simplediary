@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-export const DiaryEditor = ({ onCreate }) => {
+const DiaryEditor = ({ onCreate }) => {
   const authorInput = useRef();
   const contentInput = useRef();
   const [state, setState] = useState({ author: "", content: "", emotion: 1 });
@@ -69,3 +69,5 @@ export const DiaryEditor = ({ onCreate }) => {
     </div>
   );
 };
+
+export default React.memo(DiaryEditor);
